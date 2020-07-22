@@ -10,7 +10,7 @@
 body.dark-mode {
     --main-color: #000000;
     --text-color: #ffffff;
-    --hightlight-color: #2727e6;
+    --hightlight-color: #ff4141;
 }
 
 
@@ -18,10 +18,28 @@ body{
   font-family: 'Inter', sans-serif;
   font-size: 24px;
   line-height: 40px;
+
+
   background-color: var(--main-color);
+  color: var(--text-color); 
+}
+
+section {
   background-image: url(../assets/grid.svg);
-  background-position: center;
-  
+  background-position: center center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+
+  transform: translate(0, 0);
+  transition: transform 0.5s;
+}
+
+body.nav-open section {
+  transform: translate(-100px, 0);
 }
 
 h1 {
@@ -31,16 +49,17 @@ h1 {
 }
 
 h1 rect {
-  fill: var(--highlight-color);
+  fill: var(--hightlight-color);
 }
 
 a {
   color: var(--text-color);
   text-decoration: none;
+  transition: color 0.25s;
 }
 
 a:hover {
-  color: var(--highlight-color);
+  color: var(--hightlight-color);
   
 }
 
@@ -80,15 +99,36 @@ nav {
   background-color: var(--main-color);
   padding: 48px;
   transform: translate(100%, 0);
-  transition: transform 1s;
+  transition: transform 0.5s 0s;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
+
+
+nav.fake-mid {
+  background-color: var(--highlight-color);
+  transition-delay: 0.2s;
+}
+
+nav.fake-back {
+  background-color: var(--text-color);
+  transition-delay: 0.2s;
+}
+
 body.nav-open nav {
   transform: translate(0, 0);
+  transition-delay: 0.2s;
+}
+
+body.nav-open nav.fake-mid{
+  transition-delay: 0.1s;
+}
+
+body.nav-open nav.fake-back {
+  transition-delay: 0s;
 }
 
 nav div {
@@ -108,3 +148,35 @@ svg {
   vertical-align: middle;
 }
 
+a.dark-mode-toggle g.toggle circle {
+  transition: transform 0.5s;
+}
+
+a.dark-mode-toggle:hover g.toggle circle{
+  transform: scale(1.75);
+}
+
+div.wipe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: var(--hightlight-color);
+  z-index: 3;
+  transition: background-color 0.0001s 2s;
+}
+
+svg.spiral {
+  border: 2px solid var(--hightlight-color);
+}
+
+svg.spiral rect {
+  fill: var(--hightlight-color);
+  fill-opacity: 0;
+  stroke: var(--hightlight-color);
+}
+
+svg.spiral rect:hover {
+  fill-opacity: 0.25;
+}
